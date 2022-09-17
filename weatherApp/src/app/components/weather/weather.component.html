@@ -1,0 +1,220 @@
+<div class="container weatherapp">
+
+    <section class="search">
+
+      <form #form="ngForm" (submit)="onSubmit()">
+        <input type="text" placeholder="Search city" name="city" [(ngModel)]="cityName">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+
+    </section>
+
+    <section class="top">
+        
+        <div class="city">
+            <p class="normal-text-semibold">{{weekday}} {{day}}, {{month}}</p>
+        </div>
+
+        <div class="change-theme">
+            <button id="switch" class="switch">
+                <span><i id="theme-button" class="fas fa-sun"></i></span>
+                <span><i id="theme-button" class="fas fa-moon"></i></span>
+            </button>
+        </div>
+    
+    </section>
+
+    <section *ngIf="weatherData" class="middle">
+
+        <div class="weather-ilustration">
+            
+            <div class="temp-icon">
+                <img
+                [src]="'assets/img/weather-conditions/'+weatherData.weather[0].icon+'.svg'"
+                alt="Weather Ilustration"
+                class="icon me-3"
+                />
+            </div>
+
+            <div class="temp-info">
+                <div class="current-city">
+                    <p>
+                        {{weatherData.name}}
+                        <img
+                        [src]="'assets/img/weather-countries/'+weatherData.sys.country+'.png'"
+                        class="country"
+                        />
+                    </p>
+                    <div class="current-temp">
+                        <p>
+                            {{weatherData.main.temp | number: '1.0-0'}}°
+                        </p>
+                    </div>
+                    <div class="current-description">
+                        <p>
+                            {{weatherData.weather[0].description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-min normal-text-semibold">
+            <div class="max">
+                <img
+                    src="../assets/img/weather-dashboard/max.png"
+                    alt="Max"
+                />
+                <p class="ms-3">
+                    {{weatherData.main.temp_max | number: '1.0-0'}}°
+                </p>
+            </div>
+            <div class="min">
+                <img
+                    src="../assets/img/weather-dashboard/min.png"
+                    alt="Min"
+                />
+                <p class="me-1">
+                    {{weatherData.main.temp_min | number: '1.0-0'}}°
+                </p>
+            </div>
+        </div>
+
+        <div class="humidity-wind normal-text-semibold">
+            <div class="humidity">
+                <img
+                    src="../assets/img/weather-dashboard/humidity.png"
+                    alt="Humidity"
+                />
+                <p>
+                    {{weatherData.main.humidity}}%
+                </p>
+            </div>
+            <div class="wind">
+                <img
+                    src="../assets/img/weather-dashboard/wind.png"
+                    alt="Wind"
+                />
+                <p>
+                    {{weatherData.wind.speed}}km/h
+                </p>
+            </div>
+        </div>
+    
+    </section>
+
+    <section *ngIf="weatherData" class="lower">
+        <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a
+                    id="today-tab"
+                    class="nav-link active"
+                    data-bs-toggle="tab"
+                    data-bs-target="#today"
+                    role="tab"
+                    aria-controls="today"
+                    aria-selected="true"
+                    >Today</a
+                >
+            </li>
+            <li class="nav-item" role="presentation">
+                <a
+                    id="week-tab"
+                    class="nav-link"
+                    data-bs-toggle="tab"
+                    data-bs-target="#week"
+                    role="tab"
+                    aria-controls="week"
+                    aria-selected="false"
+                    >Week</a
+                >
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabControl">
+            <div
+            class="tab-pane fade show active"
+            id="today"
+            role="tabpanel"
+            aria-labelledby="today-tab"
+            >
+                <div class="today-forecast">
+
+                    <div *ngFor="let hourly of hourlyWeather; first as isFirst" class="widget">
+                        <p class="time medium-text mt-2">
+                            {{isFirst ? "Now" : (hourly.dt * 1000 | date: "shortTime")}}
+                        </p>
+                        <img
+                            [src]="'assets/img/weather-conditions/'+hourly.weather[0].icon+'.svg'"
+                            alt="Weather Ilustration"
+                        />
+                        <p class="temp medium-text-semibold mt-2">
+                            {{hourly.temp | number: '1.0-0'}}°
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div
+            class="tab-pane fade"
+            id="week"
+            role="tabpanel"
+            aria-labelledby="week-tab"
+            >
+                <div class="week-forecast">
+
+                    <div *ngFor="let daily of dailyWeather; first as isFirst" class="widget">
+                        <div class="main">
+                            <div class="date">
+                                <div class="day medium-text mt-2">
+                                    {{ isFirst ? "Today" : (daily.dt * 1000 | date: "EEE d, MMM") }}
+                                </div>
+                                <div class="description small-text-medium mt-1">
+                                    {{daily.weather[0].description}}
+                                </div>
+                            </div>
+                            <img
+                                [src]="'assets/img/weather-conditions/'+daily.weather[0].icon+'.svg'"
+                                alt="Weather Ilustration"
+                            />
+                        </div>
+                        <div class="temp">
+                            <div class="max">
+                                <img
+                                src="assets/img/weather-dashboard/max.png"
+                                alt="Max"
+                                />
+                                <p class="medium-text-semibold ms-1">
+                                    {{daily.temp.max | number: '1.0-0'}}°
+                                </p>
+                            </div>
+                            <div class="min">
+                                <img
+                                src="assets/img/weather-dashboard/min.png"
+                                alt="Min"
+                                />
+                                <p class="medium-text-semibold me-1">
+                                    {{daily.temp.min | number: '1.0-0'}}°
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+      <div class="container">
+          <div class="credits medium-text-semibold">
+              Nicolás Helman
+              <a href="https://www.linkedin.com/in/nicolas-helman/" target="_blank"><i class="fab fa-linkedin text-primary me-1"></i></a>
+              <a href="https://github.com/NicolasHelman/WeatherApp" target="_blank"><i class="fab fa-github text-muted"></i></a>
+          </div>
+      </div>
+    </section>
+
+</div>

@@ -1,1 +1,567 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+    /*========== Colors ==========*/
+    --hue-color: 250; /*Purple 250 - Green 142 - Blue 230 - Pink 340*/
+
+    /* HSL color mode */
+    --first-color: hsl(var(--hue-color), 69%, 61%);
+    --first-color-second: hsl(var(--hue-color), 69%, 61%);
+    --first-color-alt: hsl(var(--hue-color), 57%, 53%);
+    --first-color-lighter: hsl(var(--hue-color), 92%, 85%);
+    --title-color: hsl(var(--hue-color), 8%, 15%);
+    --text-color: hsl(var(--hue-color), 8%, 45%);
+    --text-color-light: hsl(var(--hue-color), 8%, 65%);
+    --input-color: hsl(var(--hue-color), 70%, 96%);
+    --body-color: hsl(var(--hue-color), 60%, 99%);
+    --container-color: #FFF;
+    --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
+    --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
+
+    /*========== Font and typography ==========*/
+    --body-font: 'Poppins', sans-serif;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    margin: 0 0 var(--header-height) 0;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    color: var(--text-color);
+    transition: .5s ease all;
+}
+
+/*========== Variables Dark theme ==========*/
+body.dark{
+    /* HSL color mode */
+    --first-color-second: hsl(var(--hue-color), 30%, 8%);
+    --title-color: hsl(var(--hue-color), 8%, 95%);
+    --text-color: hsl(var(--hue-color), 8%, 75%);
+    --input-color: hsl(var(--hue-color), 29%, 16%);
+    --body-color: hsl(var(--hue-color), 28%, 12%);
+    --container-color: hsl(var(--hue-color), 29%, 16%);
+    --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
+    --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
+}
+
+h1,h2,h3,h4{
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+}
+
+/*
+ * Typography
+ */
+.heading-1 {
+    font-size: 2em;
+    font-weight: 800;
+}
+.heading-2 {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+.large-text {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+.large-text-semibold {
+    font-size: 1.3em;
+    font-weight: 700;
+}
+.medium-text {
+    font-size: 1em;
+    font-weight: 600;
+}
+.medium-text-semibold {
+    font-size: 1em;
+    font-weight: 700;
+}
+.normal-text {
+    font-size: 0.8em;
+    font-weight: 400;
+}
+.normal-text-semibold {
+    font-size: 0.8em;
+    font-weight: 700;
+}
+.normal-text-bold {
+    font-size: 0.8em;
+    font-weight: 800;
+}
+.small-text {
+    font-size: 0.6em;
+    font-weight: 400;
+}
+.small-text-medium {
+    font-size: 0.7em;
+    font-weight: 600;
+}
+
+/* 
+=================== SCROLL BAR =======================
+*/
+::-webkit-scrollbar{
+    width: .60rem;
+    background-color: var(--scroll-bar-color);
+    border-radius: .5rem;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: var(--scroll-thumb-color);
+    border-radius: .5rem;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background-color: var(--first-color-lighter);
+}
+
+/* 
+=================== ANIMATION FLOAT =======================
+*/
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-3px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
+.weatherapp {
+    padding: 50px;
+}
+
+/* 
+=================== SEARCH =======================
+*/
+.search {
+    margin-bottom: 3em;
+    display: flex;
+    justify-content: center;
+}
+
+.search form {
+    background: var(--input-color);
+    display: flex;
+    align-items: center;
+    border-radius: 60px;
+    padding: 5px 10px;
+    backdrop-filter: blur(4px) saturate(180%);
+}
+
+.search input {
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: var(--title-color); 
+}
+
+.search button {
+    border: 0;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: var(--input-color);
+    color: var(--title-color);
+}
+
+.search button:hover {
+    background: var(--first-color-lighter);
+}
+
+.search input::placeholder { 
+    color: var(--text-color-light); 
+}
+
+/* 
+=================== TOP =======================
+*/
+
+.top {
+    display: grid;
+    grid-area: main-top;
+    grid-template-columns: 2fr 1fr;
+}
+
+.top .city p {
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+/* ------ Change Theme ------ */
+  
+.change-theme {
+    place-self: start end;
+    display: flex;
+    width: 70px;
+    justify-content: space-between;
+}
+
+.change-theme .switch {
+    background: var(--first-color-second);
+    border-radius: 1000px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    outline: none;
+}
+
+.change-theme .switch span {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    display: block;
+    background: none;
+    color: #FFF;
+    font-size: 15px;
+}
+
+.change-theme .switch i {
+    font-size: 14px;
+}
+
+.change-theme .switch::after {
+    content: "";
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    background: #f1f1f1;
+    top: 0;
+    left: 0;
+    right: unset;
+    border-radius: 100px;
+    transition: .3s ease all;
+    box-shadow: 0px 0px 2px 2px rgba(0,0,0,.2);
+}
+
+.change-theme .switch.active {
+    background: var(--first-color-lighter);
+    color: #111;
+}
+
+.change-theme .switch.active::after {
+    right: 0;
+    left: unset;
+}
+
+/* 
+=================== MIDDLE =======================
+*/
+
+.middle {
+    display: grid;
+    grid-area: main-middle;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 1em;
+    margin-top: 3em;
+}
+
+/* ------ Weather Ilustration ------ */
+
+.weather-ilustration {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.temp-icon img {
+    width: 12em;
+    height: auto;
+    transform: translatey(0px);
+	animation: float 4s ease-in-out infinite;
+}
+
+.temp-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.current-city p {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.current-city img {
+    width: 1.4em;
+    height: auto;
+    margin-bottom: 8px;
+}
+
+.current-temp p {
+    font-size: 30px;
+    color: var(--title-color);
+}
+  
+.current-description p {
+    font-size: 14px;
+    color: var(--text-color-light);
+    text-transform: capitalize;
+}
+
+@media only screen and (min-width: 720px) {
+    .top .temp-icon img {
+        width: 14em;
+    }
+}
+  
+@media only screen and (min-width: 1024px) {
+    .top .temp-icon img {
+        width: 18em;
+    }
+}
+
+/* ------ Max Min ------ */
+
+.max-min {
+    display: grid;
+    grid-gap: 2em;
+    grid-template-columns: 1fr 1fr;
+}
+
+.max-min .max {
+    place-self: center end;
+}
+
+.max-min .min {
+    place-self: center start;
+}
+
+.max-min p {
+    color: var(--text-color);
+    text-align: center;
+    margin-top: 5px;
+}
+
+.max-min img {
+    width: 3em;
+    transform: translatey(0px);
+	animation: float 3s ease-in-out infinite;
+}
+
+/* ------ Humidity - Wind ------ */
+
+.humidity-wind {
+    display: grid;
+    grid-gap: 2em;
+    grid-template-columns: 1fr 1fr;
+}
+
+.humidity-wind .humidity {
+    place-self: center end;
+}
+
+.humidity-wind .wind {
+    place-self: center start;
+}
+
+.humidity-wind p {
+    color: var(--text-color);
+    text-align: center;
+    margin-top: 5px;
+}
+
+.humidity-wind img {
+    width: 3em;
+    transform: translatey(0px);
+	animation: float 3s ease-in-out infinite;
+}
+
+/* 
+=================== LOWER =======================
+*/
+.lower {
+    margin-top: 30px;
+}
+
+.lower .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: var(--first-color-alt);
+    background-color: transparent;
+    border-color: transparent transparent var(--first-color-alt);
+    border-bottom: 2px solid !important;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.lower .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.lower .nav-link:hover {
+    border: none;
+    cursor: pointer;
+}
+
+.lower .nav-item a {
+    color: var(--text-color-light);
+}
+
+/* ------ Today Forecast ------ */
+
+.today-forecast {
+    display: grid;
+    gap: .5em;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    padding: 2em 0;
+}
+  
+.today-forecast .widget {
+    width: 95px;
+    height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--input-color);
+    border-radius: 10px;
+    transition: all 0.5s;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.today-forecast .widget:hover {
+    box-shadow: 0 4px 17px var(--text-color);
+    transform: translateY(-3px);
+}
+
+.today-forecast .widget img {
+    height: 70px;
+    transform: translatey(0px);
+	animation: float 3s ease-in-out infinite;
+}
+
+.today-forecast .widget .time {
+    color: var(--title-color);
+}
+
+.today-forecast .widget .temp {
+    color: var(--text-color);
+    text-align: center;
+}
+
+/* ------ Week Forecast ------ */
+
+.week-forecast {
+    display: grid;
+    gap: .5em;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    padding: 2em 0;
+}
+  
+.week-forecast .widget {
+    width: 140px;
+    height: 170px;
+    display: grid;
+    gap: 1em;
+    grid-template-rows: 1fr 1fr;
+    position: relative;
+    padding: 1em;
+    background: var(--input-color);
+    border-radius: 10px;
+    transition: all 0.5s;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.week-forecast .widget:hover {
+    box-shadow: 0 4px 17px var(--text-color);
+    transform: translateY(-3px);
+}
+  
+.week-forecast .main{
+    display: flex;
+    justify-content: space-between;
+}
+  
+.week-forecast .main img {
+    height: 55px;
+    position: absolute;
+    top: -1em;
+    right: -1em;
+    transform: translatey(0px);
+	animation: float 3s ease-in-out infinite;
+}
+
+.week-forecast .main .day {
+    color: var(--title-color);
+}
+
+.week-forecast .main .description {
+    color: var(--text-color);
+    text-transform: capitalize;
+}
+
+.week-forecast .temp{
+    display: grid;
+    grid-gap: 2em;
+    grid-template-columns: 1fr 1fr;
+}
+
+.week-forecast .temp img {
+    width: 2em;
+}
+
+.week-forecast .temp p {
+    margin-top: 0.5em;
+    text-align: center;
+}
+  
+.week-forecast .min, span{
+    color: var(--dark-gray);
+}
+
+/* 
+=================== FOOTER =======================
+*/
+.footer {
+    z-index: 9999;
+}
+.footer .credits {
+    padding-top: 50px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-color);
+}
+.footer .credits a {
+    text-decoration: none;
+    color: var(--first-color-alt);
+}
+.footer .credits a:hover {
+    color: var(--first-color);
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
